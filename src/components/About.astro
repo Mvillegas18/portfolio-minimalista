@@ -1,0 +1,98 @@
+---
+import T from './T.astro';
+import { site } from '../data/site';
+
+const highlights = [
+  { label: 'about.focusLabel', valueKey: 'about.focusValue' },
+  { label: 'about.locationLabel', fact: site.location },
+  { label: 'about.openLabel', valueKey: 'about.openValue' },
+];
+---
+
+<section id="about" aria-labelledby="about-title" class="scroll-mt-24 pt-16 sm:pt-24">
+  <div class="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-16">
+    <div>
+      <p
+        class="reveal font-mono text-xl uppercase tracking-[0.2em] text-accent-600 dark:text-accent-400"
+      >
+        <T k="about.hello" />
+      </p>
+
+      <h1
+        id="about-title"
+        class="reveal mt-4 text-4xl font-semibold tracking-tight text-neutral-900 dark:text-white sm:text-5xl"
+      >
+        {site.name}
+      </h1>
+
+      <p class="reveal mt-3 text-lg font-medium text-neutral-600 dark:text-neutral-300">
+        <T k="about.role" />
+        <span class="mx-2 text-neutral-300 dark:text-neutral-600">·</span>
+        <span class="text-neutral-500 dark:text-neutral-400">{site.location}</span>
+      </p>
+
+      <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-300">
+        <T k="about.tagline" />
+      </p>
+
+      <div class="reveal mt-6 space-y-4">
+        <p class="max-w-2xl text-base leading-relaxed text-neutral-500 dark:text-neutral-400">
+          <T k="about.summary" />
+        </p>
+        <p class="max-w-2xl text-base leading-relaxed text-neutral-500 dark:text-neutral-400">
+          <T k="about.body" />
+        </p>
+      </div>
+
+      <div class="reveal mt-8 flex flex-wrap gap-3">
+        <a
+          href="#projects"
+          class="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-all hover:bg-accent-600 dark:bg-white dark:text-neutral-900 dark:hover:bg-accent-500 dark:hover:text-white"
+        >
+          <T k="about.ctaWork" />
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 rounded-lg border border-neutral-200 px-4 py-2.5 text-sm font-medium text-neutral-700 transition-all hover:border-neutral-300 hover:bg-neutral-50 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+        >
+          <T k="about.ctaContact" />
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <dl class="divide-y divide-neutral-200 rounded-xl border border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800">
+        {
+          highlights.map((item) => (
+            <div class="px-5 py-4">
+              <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+                <T k={item.label} />
+              </dt>
+              <dd class="mt-1 text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                {item.valueKey ? <T k={item.valueKey} /> : item.fact}
+              </dd>
+            </div>
+          ))
+        }
+        <div class="px-5 py-4">
+          <dt class="font-mono text-[11px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+            <T k="about.statusLabel" />
+          </dt>
+          <dd class="mt-1 flex items-center gap-2 text-sm font-medium text-neutral-800 dark:text-neutral-200">
+            <span class="relative flex size-2">
+              <span
+                class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75"
+              ></span>
+              <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+            </span>
+            <T k="about.statusValue" />
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

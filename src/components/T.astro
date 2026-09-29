@@ -1,0 +1,22 @@
+---
+/**
+ * Translatable text node.
+ *
+ * Renders the default language (Spanish) at build time and marks itself with
+ * `data-i18n` so `applyLanguage()` can swap the string on the client, without
+ * a page reload. Semantics and layout stay on the wrapping element:
+ *
+ *   <h2 class="…"><T k="sections.skills.title" /></h2>
+ */
+import { DEFAULT_LANG, getText } from '../i18n';
+
+interface Props {
+  /** Dot-separated translation key, e.g. `sections.skills.title`. */
+  k: string;
+  class?: string;
+}
+
+const { k, class: className } = Astro.props;
+---
+
+<span data-i18n={k} class={className}>{getText(DEFAULT_LANG, k)}</span>

@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Miguel Angel Villegas — Desarrollador Full Stack",
+    "description": "Portafolio de Miguel Angel Villegas, Desarrollador Full Stack en Medellín, Colombia. Proyectos, habilidades y experiencia construyendo aplicaciones web escalables con React, Next.js, TypeScript, Node.js y .NET."
+  },
+  "ui": {
+    "skipToContent": "Saltar al contenido",
+    "toggleTheme": "Cambiar el tema de color",
+    "language": "Idioma",
+    "sectionsNav": "Secciones"
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "about": {
+    "hello": "Hola, soy",
+    "role": "Desarrollador Full Stack",
+    "tagline": "Construyo soluciones web escalables, limpias y eficientes.",
+    "summary": "Desarrollador Full Stack con base en Medellín, Colombia, enfocado en transformar problemas complejos en productos web simples y confiables. Trabajo en todo el stack: desde interfaces accesibles y con tipos seguros en React y Next.js, hasta servicios bien estructurados en Node.js y .NET, respaldados por PostgreSQL y SQL Server.",
+    "body": "Disfruto descomponer problemas difíciles en piezas pequeñas y verificables, y entregar soluciones fáciles de leer y mantener. Me importan el tipado estricto, una arquitectura sensata y el rendimiento medible; sigo aprendiendo nuevas herramientas mediante proyectos personales y revisiones de código.",
+    "ctaWork": "Ver mi trabajo",
+    "ctaContact": "Hablemos",
+    "focusLabel": "Enfoque",
+    "focusValue": "Resolución de problemas y código limpio",
+    "locationLabel": "Ubicación",
+    "openLabel": "Disponibilidad",
+    "openValue": "Roles Full Stack o Frontend",
+    "statusLabel": "Estado",
+    "statusValue": "Disponible para oportunidades"
+  },
+  "sections": {
+    "skills": {
+      "index": "01 / Habilidades",
+      "title": "Tecnologías con las que trabajo",
+      "subtitle": "Un stack pragmático, pensado para entregar rápido sin sacrificar la mantenibilidad."
+    },
+    "projects": {
+      "index": "02 / Proyectos",
+      "title": "Proyectos destacados",
+      "subtitle": "Algunos productos que diseñé, construí y puse en producción. El código está disponible en GitHub.",
+      "kindLabel": "Proyecto",
+      "demo": "Demo",
+      "code": "Código",
+      "empty": "Más proyectos próximamente."
+    },
+    "experience": {
+      "index": "03 / Experiencia",
+      "title": "Dónde he trabajado",
+      "subtitle": "Impacto, responsabilidad y las tecnologías detrás de cada rol."
+    },
+    "contact": {
+      "index": "04 / Contacto",
+      "title": "Trabajemos juntos",
+      "subtitle": "Estoy abierto a oportunidades Full Stack o Frontend. La vía más rápida para escribirme es el correo: suelo responder en menos de 24 horas.",
+      "channels": {
+        "email": {
+          "label": "Correo",
+          "cta": "Enviar un correo"
+        },
+        "github": {
+          "label": "GitHub",
+          "cta": "Ver repositorios"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "cta": "Conectemos"
+        }
+      }
+    }
+  },
+  "footer": {
+    "builtWith": "— construido con"
+  }
+}

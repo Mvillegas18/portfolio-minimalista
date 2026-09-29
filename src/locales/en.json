@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Miguel Angel Villegas — Full Stack Developer",
+    "description": "Portfolio of Miguel Angel Villegas, Full Stack Developer in Medellín, Colombia. Projects, skills and experience building scalable web applications with React, Next.js, TypeScript, Node.js and .NET."
+  },
+  "ui": {
+    "skipToContent": "Skip to content",
+    "toggleTheme": "Toggle color theme",
+    "language": "Language",
+    "sectionsNav": "Sections"
+  },
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "about": {
+    "hello": "Hi, I'm",
+    "role": "Full Stack Developer",
+    "tagline": "Building scalable, clean, and efficient web solutions.",
+    "summary": "Full Stack Developer based in Medellín, Colombia, focused on turning complex problems into simple, reliable web products. I work across the whole stack — from accessible, type-safe React and Next.js interfaces to well-structured Node.js and .NET services backed by PostgreSQL and SQL Server.",
+    "body": "I enjoy breaking down ambiguous problems into small, testable pieces and shipping solutions that are easy to read and easy to maintain. I care about strong typing, sensible architecture and measurable performance — and I keep learning new tools through side projects and code reviews.",
+    "ctaWork": "View my work",
+    "ctaContact": "Get in touch",
+    "focusLabel": "Focus",
+    "focusValue": "Problem solving & clean code",
+    "locationLabel": "Location",
+    "openLabel": "Open to",
+    "openValue": "Full Stack / Frontend roles",
+    "statusLabel": "Status",
+    "statusValue": "Available for opportunities"
+  },
+  "sections": {
+    "skills": {
+      "index": "01 / Skills",
+      "title": "Technologies I work with",
+      "subtitle": "A pragmatic stack chosen for shipping fast without sacrificing maintainability."
+    },
+    "projects": {
+      "index": "02 / Projects",
+      "title": "Selected projects",
+      "subtitle": "A few things I've designed, built and shipped. Source code is public on GitHub.",
+      "kindLabel": "Project",
+      "demo": "Demo",
+      "code": "Code",
+      "empty": "More projects coming soon."
+    },
+    "experience": {
+      "index": "03 / Experience",
+      "title": "Where I've worked",
+      "subtitle": "Impact, ownership and the technologies behind it."
+    },
+    "contact": {
+      "index": "04 / Contact",
+      "title": "Let's work together",
+      "subtitle": "I'm currently open to Full Stack and Frontend roles. The fastest way to reach me is email — I usually reply within 24 hours.",
+      "channels": {
+        "email": {
+          "label": "Email",
+          "cta": "Send an email"
+        },
+        "github": {
+          "label": "GitHub",
+          "cta": "View repositories"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "cta": "Connect with me"
+        }
+      }
+    }
+  },
+  "footer": {
+    "builtWith": "— built with"
+  }
+}

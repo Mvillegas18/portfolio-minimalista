@@ -1,0 +1,27 @@
+{
+  "name": "portfolio-minimalista",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimalist developer portfolio of Miguel Angel Villegas — Full Stack Developer",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "check:i18n": "esbuild scripts/check-i18n.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/check-i18n.mjs --define:import.meta.env.DEV=false --log-level=silent && node node_modules/.cache/check-i18n.mjs",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.6.3",
+    "typescript": "^5.9.3"
+  }
+}

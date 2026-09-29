@@ -1,0 +1,148 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import T from '../components/T.astro';
+import { DEFAULT_LANG, getText } from '../i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+// Spanish is the default language of the statically rendered document.
+const {
+  title = getText(DEFAULT_LANG, 'meta.title'),
+  description = getText(DEFAULT_LANG, 'meta.description'),
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+
+// Structured data for search engines (JSON-LD).
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Miguel Angel Villegas',
+  jobTitle: getText(DEFAULT_LANG, 'about.role'),
+  email: 'mailto:miguel.villegas@example.com',
+  inLanguage: DEFAULT_LANG,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Medellín',
+    addressCountry: 'CO',
+  },
+  url: 'https://miguelvillegas.dev',
+  sameAs: ['https://github.com/miguelvillegas', 'https://www.linkedin.com/in/miguelvillegas'],
+  knowsAbout: [
+    'React',
+    'Next.js',
+    'TypeScript',
+    'TailwindCSS',
+    'Node.js',
+    'Express',
+    '.NET',
+    'PostgreSQL',
+    'SQL Server',
+    'Docker',
+  ],
+});
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Miguel Angel Villegas" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Miguel Angel Villegas" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Fonts: preconnect + swap keeps text visible while loading. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" is:inline set:html={jsonLd} />
+
+    <!-- Apply the stored theme before first paint to avoid a flash of the wrong theme. -->
+    <script is:inline>
+      (() => {
+        document.documentElement.classList.add('js');
+        let stored = null;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch {}
+        const dark = stored
+          ? stored === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+  </head>
+
+  <body class="min-h-screen font-sans">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent-600 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+    >
+      <T k="ui.skipToContent" />
+    </a>
+
+    <Header />
+
+    <main id="main" class="container-page">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<script>
+  // Fade-in-on-scroll: adds `.is-visible` once, then stops observing.
+  const reveal = () => {
+    const items = document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+    );
+
+    items.forEach((el, i) => {
+      // Small stagger for elements already in the first viewport.
+      el.style.animationDelay = `${Math.min(i, 6) * 40}ms`;
+      observer.observe(el);
+    });
+  };
+
+  reveal();
+  document.addEventListener('astro:page-load', reveal);
+</script>

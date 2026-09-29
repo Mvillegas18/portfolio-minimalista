@@ -1,0 +1,94 @@
+---
+/**
+ * Sticky tab-style navigation with an active-section indicator.
+ */
+import { navLinks, site } from '../data/site';
+import { DEFAULT_LANG, getText } from '../i18n';
+import T from './T.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-neutral-200/80 bg-white/80 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/80"
+>
+  <div class="container-page flex h-16 items-center gap-3 sm:gap-4">
+    <a
+      href="#about"
+      class="group flex shrink-0 items-center gap-2 text-sm font-semibold tracking-tight text-neutral-900 dark:text-white"
+    >
+      <span
+        class="grid size-7 place-items-center rounded-md bg-neutral-900 font-mono text-xs text-white transition-colors group-hover:bg-accent-600 dark:bg-white dark:text-neutral-900 dark:group-hover:bg-accent-500"
+      >
+        MV
+      </span>
+      <span class="hidden sm:inline">{site.name}</span>
+    </a>
+
+    <nav
+      aria-label={getText(DEFAULT_LANG, 'ui.sectionsNav')}
+      data-i18n-aria="ui.sectionsNav"
+      class="min-w-0 flex-1 overflow-x-auto"
+    >
+      <ul
+        id="nav-tabs"
+        class="flex items-center gap-1 rounded-lg bg-neutral-100 p-1 text-sm dark:bg-neutral-900 [&::-webkit-scrollbar]:hidden"
+        style="scrollbar-width: none;"
+      >
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={`#${link.id}`}
+                data-nav-link={link.id}
+                class="block whitespace-nowrap rounded-md px-3 py-1.5 font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white aria-current:bg-white aria-current:text-neutral-900 aria-current:shadow-sm dark:aria-current:bg-neutral-800 dark:aria-current:text-white"
+              >
+                <T k={`nav.${link.id}`} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex shrink-0 items-center gap-2">
+      <LanguageSwitcher />
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<script>
+  // Highlight the tab matching the section in view.
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]'),
+  );
+  const byId = new Map(links.map((l) => [l.dataset.navLink, l]));
+  const sections = links
+    .map((l) => document.getElementById(l.dataset.navLink ?? ''))
+    .filter((s): s is HTMLElement => Boolean(s));
+
+  const setActive = (id: string) => {
+    links.forEach((l) =>
+      l.dataset.navLink === id
+        ? l.setAttribute('aria-current', 'location')
+        : l.removeAttribute('aria-current'),
+    );
+    // Keep the active tab visible inside the horizontally scrollable strip.
+    byId.get(id)?.scrollIntoView({ block: 'nearest', inline: 'center' });
+  };
+
+  if (sections.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target.id) setActive(visible.target.id);
+      },
+      { rootMargin: '-72px 0px -55% 0px', threshold: [0.1, 0.4, 0.75] },
+    );
+    sections.forEach((s) => observer.observe(s));
+    setActive(sections[0].id);
+  }
+</script>

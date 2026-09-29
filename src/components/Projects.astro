@@ -1,0 +1,22 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import ProjectCard from './ProjectCard.astro';
+import T from './T.astro';
+import { projects } from '../data/projects';
+---
+
+<section id="projects" aria-labelledby="projects-title" class="scroll-mt-24 pt-24">
+  <SectionHeading id="projects" k="projects" />
+
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+  </div>
+
+  {
+    projects.length === 0 && (
+      <p class="rounded-xl border border-dashed border-neutral-300 p-8 text-center text-sm text-neutral-500 dark:border-neutral-700 dark:text-neutral-400">
+        <T k="sections.projects.empty" />
+      </p>
+    )
+  }
+</section>

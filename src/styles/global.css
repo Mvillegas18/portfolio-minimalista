@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+
+/* Class-based dark mode (toggled on <html> by the theme switch). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   Neutral base + a single subtle indigo accent.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  --color-accent-50: oklch(0.967 0.014 264.542);
+  --color-accent-100: oklch(0.93 0.028 262.881);
+  --color-accent-200: oklch(0.87 0.051 262.881);
+  --color-accent-300: oklch(0.785 0.093 263.425);
+  --color-accent-400: oklch(0.673 0.165 264.364);
+  --color-accent-500: oklch(0.585 0.233 265.175);
+  --color-accent-600: oklch(0.511 0.262 264.364);
+  --color-accent-700: oklch(0.457 0.24 264.441);
+  --color-accent-800: oklch(0.406 0.198 265.211);
+  --color-accent-900: oklch(0.374 0.177 265.211);
+
+  --animate-fade-up: fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Anchored sections must clear the sticky header. */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-white text-neutral-800 antialiased;
+  }
+
+  .dark body {
+    @apply bg-neutral-950 text-neutral-200;
+  }
+
+  ::selection {
+    @apply bg-accent-600/25 text-neutral-900;
+  }
+
+  .dark ::selection {
+    @apply bg-accent-500/30 text-neutral-100;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent-500 ring-offset-2 ring-offset-white;
+  }
+
+  .dark :focus-visible {
+    @apply ring-offset-neutral-950;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+@utility container-page {
+  @apply mx-auto w-full max-w-5xl px-6 sm:px-8;
+}
+
+/* Reveal-on-scroll: hidden only when JS is enabled, so content is never
+   invisible for users without JavaScript. */
+.js .reveal {
+  opacity: 0;
+}
+
+.js .reveal.is-visible {
+  animation: var(--animate-fade-up);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal,
+  .js .reveal.is-visible {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
